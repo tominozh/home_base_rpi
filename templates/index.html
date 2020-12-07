@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Home Base Application {% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Home Base Application</h1>
+    <span>This is a home page for a simple (at a moment) application created by Tomas.</span>
+</div>
+<div class="page-body">
+    <table>
+        <thead>
+            <tr>
+                <th>Sensor/LED</th>
+                <th>Update</th>
+                <th>Last value</th>
+                <th>Last run</th>               
+            </tr>
+            {% for reading in latest_readings %}
+            <tr>
+                <td>{{reading.reader}}</td>
+                <td><a href="{{ url_for() }}/update_reading?sensor={{reading.reader}}" class="btn-primary">Update</a> </td>
+                <td>{{reading.value}}</td>
+                <td>{{reading.timestamp}}</td>
+            </tr>
+            {% endfor %}
+        </thead>
+    </table>
+    <hr>
+    <table>
+        <thead>
+            <th>LED Color</th>
+            <th>Value</th>
+            <th>Timestamp</th>
+            <th>Action</th>
+        </thead>
+
+        {% for led in leds %}
+            <tr>
+                <td>{{led.hardware}}</td>
+                <td>{{led.value}}</td>
+                <td>{{led.timestamp}}</td>
+                <td><a href="{{ url_for('main.update_reading',sensor=led.hardware) }}" class="btn-primary">Update</a></td>
+            </tr>
+        {% endfor%}
+
+    </table>
+</div>
+{% endblock %}

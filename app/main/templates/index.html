@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Home Base Application {% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Home Base Application</h1>
+    <span>This is a home page for a simple (at a moment) application created by Tomas.</span>
+</div>
+<div class="page-body">
+    <table class="table table-bordered">
+        <caption>Latest Records from DHT 11 Sensor</caption>
+        <thead>
+            <tr>
+                <th>Sensor/LED</th>
+                <th>Last value</th>
+                <th>Last run</th>               
+            </tr>
+            {% for reading in latest_readings %}
+            <tr>
+                <td>{{reading.reader}}</td>
+                <td>
+                    {% if reading.reader == 'DTH11_humidity' %}
+                        {{reading.value}}%
+                    {% elif reading.reader == 'DTH11_temperature' %}
+                        {{reading.value}}°C
+                    {% endif %}
+                </td>
+                <td>{{reading.timestamp}}</td>
+            </tr>
+            {% endfor %}
+        </thead>
+    </table>
+    <hr>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Home Base Application {% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>All Values</h1>
+</div>
+<div class="page-body">
+    <div>
+        <form method='get' action='/show_values'>
+            <label>Choose Reader to see values
+                <select id="select_reader" name="select_reader">
+                    <option value="all" selected>all</option>
+                    <option value="humidity">humidity</option>
+                    <option value="pressure">pressure</option>
+                    <option value="temperature">temperature</option>
+                    <option value="DTH11_temperature">DTH11 Temperature</option>
+                    <option value="DTH11_humidity">DTH11 humidity</option>
+                </select>
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Reader</th>
+                    <th>Value</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+                {% for id,reader,value,timestamp in values %}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{reader}}</td>
+                    <td>{{value}}</td>
+                    <td>{{timestamp}}</td>
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
