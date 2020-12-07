@@ -2,4 +2,5 @@ venv/**
 log/**
 db/**
 __pycache__/**
+config.pyc
 
